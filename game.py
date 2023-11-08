@@ -52,7 +52,7 @@ def game_over():
     game_over_rect.midtop = (frame_size_x/2, frame_size_y/2)
     game_window.fill(Red)
     game_window.blit(game_over_surface, game_over_rect)
-    show_score(0, Black, 'Calisto MT', 20)
+    show_score(0, Black, 'Calisto MT', 35)
     pygame.display.flip()
     time.sleep(3)
     pygame.quit()
