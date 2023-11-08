@@ -23,7 +23,12 @@ game_window = pygame.display.set_mode((frame_size_x, frame_size_y))
 
 # Colors (RGB)
 # Green color hex - #3fd140
-Black_Snake = pygame.Color(0, 0, 0, 204)
+Black = pygame.Color(0, 0, 0, 204) # snake, text
+Red = pygame.Color(255, 0, 0, 204) # food
+
+# FPS
+fps_controller = pygame.time.Clock()
+
 
 
 
