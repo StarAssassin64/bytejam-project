@@ -3,7 +3,7 @@ from snake import *
 from food import Food
 
 pygame.init()
-bounds = (300, 300)
+bounds = (480, 720)
 window = pygame.display.set_mode(bounds)
 pygame.display.set_caption("Snake")
 
@@ -41,7 +41,8 @@ while run:
         snake.respawn()
         food.respawn()
 
-    window.fill((0, 0, 0))
+    bgd_image = pygame.image.load("NokiaPhone.png")
+    window.blit(bgd_image, (0, 0))
     snake.draw(pygame, window)
     food.draw(pygame, window)
     pygame.display.update()
