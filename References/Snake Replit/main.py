@@ -2,6 +2,7 @@ import pygame
 from snake import *
 from food import Food
 
+
 Black = [0, 0, 0]
 Red = [255, 0, 0]
 # Difficulty settings
@@ -12,6 +13,7 @@ Red = [255, 0, 0]
 # Impossible->  120
 difficulty = 10
 
+score = 0
 pygame.init()
 bounds = (480, 720)
 screen_size = (480, 720)
@@ -39,16 +41,17 @@ def game_over():
         pygame.quit()
         exit(0)
     elif keys[pygame.K_r]:
-        global game_active
+        global game_active, score
         game_active = True
         snake.respawn()
         food.respawn()
+        score = 0
 
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.exit()
+            pygame.quit()
             exit(0)
 
     keys = pygame.key.get_pressed()
@@ -63,7 +66,7 @@ while True:
 
     if game_active:
         snake.move()
-        snake.check_for_food(food)
+        score = snake.check_for_food(food, score)
 
         if snake.check_bounds() == True or snake.check_tail_collision() == True:
             game_active = False
