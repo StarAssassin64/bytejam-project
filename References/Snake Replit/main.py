@@ -42,8 +42,8 @@ while run:
         food.respawn()
 
     window.fill(0)
-    bgd_image = pygame.image.load("NokiaPhone.png")
-    window.blit(bgd_image, (0, 0))
     snake.draw(pygame, window)
     food.draw(pygame, window)
+    bgd_image = pygame.image.load("NokiaPhone.png")
+    window.blit(bgd_image, (0, 0))
     pygame.display.update()
