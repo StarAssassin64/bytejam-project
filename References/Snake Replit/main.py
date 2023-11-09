@@ -2,6 +2,9 @@ import pygame
 from snake import *
 from food import Food
 
+
+Black = [0, 0, 0]
+Red = [255, 0, 0]
 # Difficulty settings
 # Easy      ->  10
 # Medium    ->  25
@@ -28,7 +31,7 @@ game_active = True
 
 def game_over():
     my_font = pygame.font.SysFont('Calisto MT', 50)
-    game_over_surface = my_font.render('Game Over!', True, Black)
+    game_over_surface = my_font.render('Game Over!', True, (0,0,0))
     game_over_rect = game_over_surface.get_rect()
     game_over_rect.midtop = (screen_size[0] / 2, screen_size[1] / 2)
     window.fill(Red)
@@ -38,10 +41,11 @@ def game_over():
         pygame.quit()
         exit(0)
     elif keys[pygame.K_r]:
-        global game_active
+        global game_active, score
         game_active = True
         snake.respawn()
         food.respawn()
+        score = 0
 
 
 while True:
@@ -62,12 +66,12 @@ while True:
 
     if game_active:
         snake.move()
-        snake.check_for_food(food)
+        score = snake.check_for_food(food, score)
 
         if snake.check_bounds() == True or snake.check_tail_collision() == True:
             game_active = False
 
-        window.fill(Black)
+        window.fill((0,0,0))
         bgd_image = pygame.image.load("NokiaPhone.png")
         window.blit(bgd_image, (0, 0))
         snake.draw(pygame, window)
