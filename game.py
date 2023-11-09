@@ -53,6 +53,7 @@ change_to = direction
 score = 0
 game_active = True
 
+
 # Game Over
 def game_over():
     my_font = pygame.font.SysFont('Calisto MT', 50)
