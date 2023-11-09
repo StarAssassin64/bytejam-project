@@ -31,7 +31,7 @@ game_active = True
 
 def game_over():
     my_font = pygame.font.SysFont('Calisto MT', 50)
-    game_over_surface = my_font.render('Game Over!', True, (0,0,0))
+    game_over_surface = my_font.render('Game Over!', True, Black)
     game_over_rect = game_over_surface.get_rect()
     game_over_rect.midtop = (screen_size[0] / 2, screen_size[1] / 2)
     window.fill(Red)
@@ -51,7 +51,7 @@ def game_over():
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.exit()
+            pygame.quit()
             exit(0)
 
     keys = pygame.key.get_pressed()
@@ -71,7 +71,9 @@ while True:
         if snake.check_bounds() == True or snake.check_tail_collision() == True:
             game_active = False
 
-        window.fill((0,0,0))
+        window.fill(Black)
+        desk = pygame.image.load("Desk.png")
+        window.blit(desk, (0, 0))
         bgd_image = pygame.image.load("NokiaPhone.png")
         window.blit(bgd_image, (0, 0))
         snake.draw(pygame, window)
