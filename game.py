@@ -33,7 +33,7 @@ fps_controller = pygame.time.Clock()
 
 # Imported game variables
 snake_pos = [110, 320]
-snake_body = [[110, 320], [110-10, 320], [110-(2*10), 320]]
+snake_body = [[110, 320], [110-10, 320], [90, 320]]
 
 food_pos = [random.randrange(86, 389), random.randrange(289, 505)]
 food_spawn = True
@@ -153,6 +153,3 @@ while True:
     pygame.display.update()
     # Refresh rate
     fps_controller.tick(difficulty)
-
-if __name__ == '__main__':
-    pass
