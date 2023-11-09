@@ -2,11 +2,22 @@ import pygame
 from snake import *
 from food import Food
 
+# Difficulty settings
+# Easy      ->  10
+# Medium    ->  25
+# Hard      ->  40
+# Harder    ->  60
+# Impossible->  120
+difficulty = 15
+
+
 pygame.init()
 bounds = (480, 720)
 screen_size = (480, 720)
 window = pygame.display.set_mode(screen_size)
 pygame.display.set_caption("Snake")
+
+fps_controller = pygame.time.Clock()
 
 block_size = 10
 snake = Snake(block_size, bounds)
@@ -15,7 +26,6 @@ font = pygame.font.SysFont('Small Font Regular', 25)
 
 run = True
 while run:
-    pygame.time.delay(100)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -38,7 +48,6 @@ while run:
         text = font.render('Game Over', True, (255, 255, 255))
         window.blit(text, (20, 120))
         pygame.display.update()
-        pygame.time.delay(1000)
         snake.respawn()
         food.respawn()
 
@@ -48,3 +57,4 @@ while run:
     snake.draw(pygame, window)
     food.draw(pygame, window)
     pygame.display.update()
+    fps_controller.tick(difficulty)
