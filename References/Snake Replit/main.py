@@ -7,7 +7,7 @@ bounds = (480, 720)
 window = pygame.display.set_mode(bounds)
 pygame.display.set_caption("Snake")
 
-block_size = 20
+block_size = 10
 snake = Snake(block_size, bounds)
 food = Food(block_size, bounds)
 font = pygame.font.SysFont('comicsans', 60, True)
@@ -41,6 +41,7 @@ while run:
         snake.respawn()
         food.respawn()
 
+    window.fill(0)
     bgd_image = pygame.image.load("NokiaPhone.png")
     window.blit(bgd_image, (0, 0))
     snake.draw(pygame, window)
