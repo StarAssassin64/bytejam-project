@@ -11,7 +11,7 @@ pygame.display.set_caption("Snake")
 block_size = 10
 snake = Snake(block_size, bounds)
 food = Food(block_size, bounds)
-font = pygame.font.SysFont('papyrus', 60, True)
+font = pygame.font.SysFont('Small Font Regular', 25)
 
 run = True
 while run:
