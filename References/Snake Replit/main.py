@@ -69,6 +69,8 @@ while True:
             game_active = False
 
         window.fill(Black)
+        desk = pygame.image.load("Desk.png")
+        window.blit(desk, (0, 0))
         bgd_image = pygame.image.load("NokiaPhone.png")
         window.blit(bgd_image, (0, 0))
         snake.draw(pygame, window)
