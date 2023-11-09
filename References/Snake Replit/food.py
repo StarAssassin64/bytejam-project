@@ -18,7 +18,7 @@ class Food:
 
 
     def respawn(self):
-        blocks_in_x = 300/self.block_size
-        blocks_in_y = 220/self.block_size
-        self.x = random.randint(90, blocks_in_x - 1) * self.block_size
-        self.y = random.randint(290, blocks_in_y - 1) * self.block_size
+        # blocks_in_x = 300/self.block_size
+        # blocks_in_y = 220/self.block_size
+        self.x = random.randint(90, 390)//10*10
+        self.y = random.randint(290, 500)//10*10

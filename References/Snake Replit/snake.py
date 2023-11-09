@@ -80,9 +80,9 @@ class Snake:
 
     def check_bounds(self):
         head = self.body[-1]
-        if head[0] > 391 or head[0] < 84:
+        if head[0] > 380 or head[0] < 90:
             return True
-        if head[1] > 507 or head[1] < 287:
+        if head[1] > 500 or head[1] < 290:
             return True
 
         if head[0] < 0:
