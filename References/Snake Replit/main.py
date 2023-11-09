@@ -8,7 +8,7 @@ from food import Food
 # Hard      ->  40
 # Harder    ->  60
 # Impossible->  120
-difficulty = 15
+difficulty = 10
 
 score = 0
 pygame.init()
@@ -23,13 +23,32 @@ block_size = 10
 snake = Snake(block_size, bounds)
 food = Food(block_size, bounds)
 font = pygame.font.SysFont('Small Font Regular', 25)
+game_active = True
 
-run = True
-while run:
 
+def game_over():
+    my_font = pygame.font.SysFont('Calisto MT', 50)
+    game_over_surface = my_font.render('Game Over!', True, Black)
+    game_over_rect = game_over_surface.get_rect()
+    game_over_rect.midtop = (screen_size[0] / 2, screen_size[1] / 2)
+    window.fill(Red)
+    window.blit(game_over_surface, game_over_rect)
+    pygame.display.update()
+    if keys[pygame.K_ESCAPE]:
+        pygame.quit()
+        exit(0)
+    elif keys[pygame.K_r]:
+        global game_active
+        game_active = True
+        snake.respawn()
+        food.respawn()
+
+
+while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            run = False
+            pygame.exit()
+            exit(0)
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
@@ -41,20 +60,20 @@ while run:
     elif keys[pygame.K_DOWN]:
         snake.steer(Direction.DOWN)
 
-    snake.move()
-    score = snake.check_for_food(food, score)
+    if game_active:
+        snake.move()
+        snake.check_for_food(food)
 
-    if snake.check_bounds() == True or snake.check_tail_collision() == True:
-        text = font.render('Game Over', True, (255, 255, 255))
-        window.blit(text, (20, 120))
+        if snake.check_bounds() == True or snake.check_tail_collision() == True:
+            game_active = False
+
+        window.fill(Black)
+        bgd_image = pygame.image.load("NokiaPhone.png")
+        window.blit(bgd_image, (0, 0))
+        snake.draw(pygame, window)
+        food.draw(pygame, window)
         pygame.display.update()
-        snake.respawn()
-        food.respawn()
+    else:
+        game_over()
 
-    window.fill(0)
-    bgd_image = pygame.image.load("NokiaPhone.png")
-    window.blit(bgd_image, (0, 0))
-    snake.draw(pygame, window)
-    food.draw(pygame, window)
-    pygame.display.update()
     fps_controller.tick(difficulty)
