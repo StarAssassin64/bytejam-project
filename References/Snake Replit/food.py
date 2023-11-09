@@ -2,7 +2,7 @@ import random
 
 class Food:
     block_size = None
-    color = (0,255,0)
+    color = (255, 0, 0, 204)
     x = 240
     y = 400
     bounds = None
@@ -18,7 +18,7 @@ class Food:
 
 
     def respawn(self):
-        blocks_in_x = (self.bounds[0])/self.block_size
-        blocks_in_y = (self.bounds[1])/self.block_size
-        self.x = random.randint(0, blocks_in_x - 1) * self.block_size
-        self.y = random.randint(0, blocks_in_y - 1) * self.block_size
+        blocks_in_x = 300/self.block_size
+        blocks_in_y = 220/self.block_size
+        self.x = random.randint(90, blocks_in_x - 1) * self.block_size
+        self.y = random.randint(290, blocks_in_y - 1) * self.block_size

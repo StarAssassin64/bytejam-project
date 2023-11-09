@@ -4,13 +4,14 @@ from food import Food
 
 pygame.init()
 bounds = (480, 720)
-window = pygame.display.set_mode(bounds)
+screen_size = (480, 720)
+window = pygame.display.set_mode(screen_size)
 pygame.display.set_caption("Snake")
 
 block_size = 10
 snake = Snake(block_size, bounds)
 food = Food(block_size, bounds)
-font = pygame.font.SysFont('comicsans', 60, True)
+font = pygame.font.SysFont('papyrus', 60, True)
 
 run = True
 while run:
@@ -42,8 +43,8 @@ while run:
         food.respawn()
 
     window.fill(0)
-    snake.draw(pygame, window)
-    food.draw(pygame, window)
     bgd_image = pygame.image.load("NokiaPhone.png")
     window.blit(bgd_image, (0, 0))
+    snake.draw(pygame, window)
+    food.draw(pygame, window)
     pygame.display.update()
