@@ -23,19 +23,31 @@ pygame.display.set_caption("Snake Byte")
 snake_icon = pygame.image.load("snake_icon.png")
 pygame.display.set_icon(snake_icon)
 
+# Initializes inits and loads sounds onto game
+pygame.init()
+pygame.mixer.init(44100,-16,1, 1024)
+pygame.mixer.set_num_channels(5)
+
+snake_move = pygame.mixer.Sound('../../sounds/snake_move.wav')
+pickup_food = pygame.mixer.Sound('../../sounds/pickup_fruit_alt.wav')
+snake_death = pygame.mixer.Sound('../../sounds/snake_die.wav')
+music = pygame.mixer.Sound('../../sounds/snakebite.mp3')
+
 fps_controller = pygame.time.Clock()
 
 block_size = 10
 snake = Snake(block_size, bounds)
 food = Food(block_size, bounds)
-font = pygame.font.SysFont('Small Font Regular', 25)
-font_small = pygame.font.SysFont('Small Font Regular', 15)
-font_smaller = pygame.font.SysFont('Small Font Regular', 10)
+font = pygame.font.SysFont('PixelOperator', 32)
+font_small = pygame.font.SysFont('PixelOperator', 18)
+font_smaller = pygame.font.SysFont('PixelOperator', 15)
 game_active = True
-
+snake_direction = 'RIGHT'
+pygame.mixer.Channel(1).play(music, 1)
 
 def game_over():
     global game_active, score, difficulty
+    pygame.mixer.Channel(1).stop()
     game_over_surface = font.render('Game Over!', True, Black)
     game_over_surface_2 = font_small.render(f'Score: {score}', True, Black)
     game_over_surface_3 = font_small.render('Press R to restart..', True, Black)
@@ -62,6 +74,7 @@ def game_over():
     elif keys[pygame.K_r]:
         difficulty = baseDifficulty
         game_active = True
+        pygame.mixer.Channel(1).play(music, 1)
         snake.respawn()
         food.respawn()
         score = 0
@@ -76,18 +89,43 @@ while True:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         snake.steer(Direction.LEFT)
+        if game_active:
+            if snake_direction != 'LEFT' and snake_direction != 'RIGHT':
+                pygame.mixer.Channel(2).play(snake_move)
+            else:
+                pass
+        snake_direction = 'LEFT'
     elif keys[pygame.K_RIGHT]:
         snake.steer(Direction.RIGHT)
+        if game_active:
+            if snake_direction != 'LEFT' and snake_direction != 'RIGHT':
+                pygame.mixer.Channel(2).play(snake_move)
+            else:
+                pass
+        snake_direction = 'RIGHT'
     elif keys[pygame.K_UP]:
         snake.steer(Direction.UP)
+        if game_active:
+            if snake_direction != 'UP' and snake_direction != 'DOWN':
+                pygame.mixer.Channel(2).play(snake_move)
+            else:
+                pass
+        snake_direction = 'UP'
     elif keys[pygame.K_DOWN]:
         snake.steer(Direction.DOWN)
+        if game_active:
+            if snake_direction != 'UP' and snake_direction != 'DOWN':
+                pygame.mixer.Channel(2).play(snake_move)
+            else:
+                pass
+        snake_direction = 'DOWN'
 
     if game_active:
         snake.move()
         score, difficulty = snake.check_for_food(food, score, difficulty)
 
         if snake.check_bounds() == True or snake.check_tail_collision() == True:
+            pygame.mixer.Channel(2).play(snake_death)
             game_active = False
 
         window.fill(Black)

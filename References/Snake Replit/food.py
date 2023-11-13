@@ -1,4 +1,5 @@
 import random
+from snake import Snake
 
 class Food:
     block_size = None
