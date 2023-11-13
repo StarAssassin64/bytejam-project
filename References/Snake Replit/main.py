@@ -33,6 +33,7 @@ pickup_food = pygame.mixer.Sound('../../sounds/pickup_fruit_alt.wav')
 snake_death = pygame.mixer.Sound('../../sounds/snake_die.wav')
 music = pygame.mixer.Sound('../../sounds/snakebite.mp3')
 
+
 fps_controller = pygame.time.Clock()
 
 block_size = 10
@@ -48,6 +49,10 @@ pygame.mixer.Channel(1).play(music, 1)
 def game_over():
     global game_active, score, difficulty
     pygame.mixer.Channel(1).stop()
+
+    snake_gameover = pygame.image.load('snake_die.png')
+    snake_gameover_rect = snake_gameover.get_rect()
+
     game_over_surface = font.render('Game Over!', True, Black)
     game_over_surface_2 = font_small.render(f'Score: {score}', True, Black)
     game_over_surface_3 = font_small.render('Press R to restart..', True, Black)
@@ -61,12 +66,16 @@ def game_over():
     game_over_rect_3 = game_over_surface_3.get_rect()
     game_over_rect_3.midtop = (screen_size[0] / 2, screen_size[1] / 2 + 50)
 
+    snake_gameover_rect = snake_gameover.get_rect()
+    snake_gameover_rect.midtop = (screen_size[0] / 2, screen_size[1] / 2 + 100)
+
     window.fill(Black)
     window.blit(desk, (0, 0))
     window.blit(bgd_image, (0, 0))
     window.blit(game_over_surface, game_over_rect)
     window.blit(game_over_surface_2, game_over_rect_2)
     window.blit(game_over_surface_3, game_over_rect_3)
+    window.blit(snake_gameover, snake_gameover_rect)
     pygame.display.update()
     if keys[pygame.K_ESCAPE]:
         pygame.quit()
