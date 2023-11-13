@@ -27,21 +27,36 @@ block_size = 10
 snake = Snake(block_size, bounds)
 food = Food(block_size, bounds)
 font = pygame.font.SysFont('Small Font Regular', 25)
+font_small = pygame.font.SysFont('Small Font Regular', 15)
 game_active = True
 
 
 def game_over():
+    global game_active, score, difficulty
     game_over_surface = font.render('Game Over!', True, Black)
+    game_over_surface_2 = font_small.render(f'Score: {score}', True, Black)
+    game_over_surface_3 = font_small.render('Press R to restart..', True, Black)
+
     game_over_rect = game_over_surface.get_rect()
     game_over_rect.midtop = (screen_size[0] / 2, screen_size[1] / 2)
-    window.fill(Red)
+
+    game_over_rect_2 = game_over_surface_2.get_rect()
+    game_over_rect_2.midtop = (screen_size[0] / 2, screen_size[1] / 2 + 30)
+
+    game_over_rect_3 = game_over_surface_3.get_rect()
+    game_over_rect_3.midtop = (screen_size[0] / 2, screen_size[1] / 2 + 50)
+
+    window.fill(Black)
+    window.blit(desk, (0, 0))
+    window.blit(bgd_image, (0, 0))
     window.blit(game_over_surface, game_over_rect)
+    window.blit(game_over_surface_2, game_over_rect_2)
+    window.blit(game_over_surface_3, game_over_rect_3)
     pygame.display.update()
     if keys[pygame.K_ESCAPE]:
         pygame.quit()
         exit(0)
     elif keys[pygame.K_r]:
-        global game_active, score, difficulty
         difficulty = baseDifficulty
         game_active = True
         snake.respawn()
