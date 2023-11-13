@@ -19,7 +19,7 @@ pygame.init()
 bounds = (480, 720)
 screen_size = (480, 720)
 window = pygame.display.set_mode(screen_size)
-pygame.display.set_caption("Snake")
+pygame.display.set_caption("Snake Byte")
 
 fps_controller = pygame.time.Clock()
 
