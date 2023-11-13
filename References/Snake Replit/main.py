@@ -20,6 +20,8 @@ bounds = (480, 720)
 screen_size = (480, 720)
 window = pygame.display.set_mode(screen_size)
 pygame.display.set_caption("Snake Byte")
+snake_icon = pygame.image.load("snake_icon.png")
+pygame.display.set_icon(snake_icon)
 
 fps_controller = pygame.time.Clock()
 
@@ -28,6 +30,7 @@ snake = Snake(block_size, bounds)
 food = Food(block_size, bounds)
 font = pygame.font.SysFont('Small Font Regular', 25)
 font_small = pygame.font.SysFont('Small Font Regular', 15)
+font_smaller = pygame.font.SysFont('Small Font Regular', 10)
 game_active = True
 
 
