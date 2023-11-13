@@ -11,7 +11,8 @@ Red = [255, 0, 0]
 # Hard      ->  40
 # Harder    ->  60
 # Impossible->  120
-difficulty = 10
+baseDifficulty = 10
+difficulty = baseDifficulty
 
 score = 0
 pygame.init()
@@ -30,8 +31,7 @@ game_active = True
 
 
 def game_over():
-    my_font = pygame.font.SysFont('Calisto MT', 50)
-    game_over_surface = my_font.render('Game Over!', True, Black)
+    game_over_surface = font.render('Game Over!', True, Black)
     game_over_rect = game_over_surface.get_rect()
     game_over_rect.midtop = (screen_size[0] / 2, screen_size[1] / 2)
     window.fill(Red)
@@ -41,7 +41,8 @@ def game_over():
         pygame.quit()
         exit(0)
     elif keys[pygame.K_r]:
-        global game_active, score
+        global game_active, score, difficulty
+        difficulty = baseDifficulty
         game_active = True
         snake.respawn()
         food.respawn()
@@ -66,7 +67,7 @@ while True:
 
     if game_active:
         snake.move()
-        score = snake.check_for_food(food, score)
+        score, difficulty = snake.check_for_food(food, score, difficulty)
 
         if snake.check_bounds() == True or snake.check_tail_collision() == True:
             game_active = False

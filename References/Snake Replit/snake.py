@@ -61,15 +61,16 @@ class Snake:
     def eat(self):
         self.length += 1
 
-    def check_for_food(self, food, score):
+    def check_for_food(self, food, score, difficulty):
         head = self.body[-1]
         if head[0] == food.x and head[1] == food.y:
             self.eat()
-            score = score + 1
+            score += 1
+            difficulty += .5
             print(f'Score: {score}')
             food.respawn()
 
-        return score
+        return score, difficulty
 
     def check_tail_collision(self):
         head = self.body[-1]
