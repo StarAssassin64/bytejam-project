@@ -32,6 +32,7 @@ snake_move = pygame.mixer.Sound('../../sounds/snake_move.wav')
 pickup_food = pygame.mixer.Sound('../../sounds/pickup_fruit_alt.wav')
 snake_death = pygame.mixer.Sound('../../sounds/snake_die.wav')
 music = pygame.mixer.Sound('../../sounds/snakebite.mp3')
+gameover_amb = pygame.mixer.Sound('../../sounds/gameover_ambience.mp3')
 
 
 fps_controller = pygame.time.Clock()
@@ -46,13 +47,10 @@ game_active = True
 snake_direction = 'RIGHT'
 pygame.mixer.Channel(1).play(music, 1)
 
+
 def game_over():
     global game_active, score, difficulty
-    pygame.mixer.Channel(1).stop()
-
     snake_gameover = pygame.image.load('snake_die.png')
-    snake_gameover_rect = snake_gameover.get_rect()
-
     game_over_surface = font.render('Game Over!', True, Black)
     game_over_surface_2 = font_small.render(f'Score: {score}', True, Black)
     game_over_surface_3 = font_small.render('Press R to restart..', True, Black)
@@ -77,6 +75,7 @@ def game_over():
     window.blit(game_over_surface_3, game_over_rect_3)
     window.blit(snake_gameover, snake_gameover_rect)
     pygame.display.update()
+
     if keys[pygame.K_ESCAPE]:
         pygame.quit()
         exit(0)
@@ -135,6 +134,7 @@ while True:
 
         if snake.check_bounds() == True or snake.check_tail_collision() == True:
             pygame.mixer.Channel(2).play(snake_death)
+            pygame.mixer.Channel(1).play(gameover_amb, 1)
             game_active = False
 
         window.fill(Black)
