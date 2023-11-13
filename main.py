@@ -20,7 +20,7 @@ bounds = (480, 720)
 screen_size = (480, 720)
 window = pygame.display.set_mode(screen_size)
 pygame.display.set_caption("Snake Byte")
-snake_icon = pygame.image.load("snake_icon.png")
+snake_icon = pygame.image.load("./images/snake_icon.png")
 pygame.display.set_icon(snake_icon)
 
 # Initializes inits and loads sounds onto game
@@ -28,11 +28,11 @@ pygame.init()
 pygame.mixer.init(44100,-16,1, 1024)
 pygame.mixer.set_num_channels(5)
 
-snake_move = pygame.mixer.Sound('../../sounds/snake_move.wav')
-pickup_food = pygame.mixer.Sound('../../sounds/pickup_fruit_alt.wav')
-snake_death = pygame.mixer.Sound('../../sounds/snake_die.wav')
-music = pygame.mixer.Sound('../../sounds/snakebite.mp3')
-gameover_amb = pygame.mixer.Sound('../../sounds/gameover_ambience.mp3')
+snake_move = pygame.mixer.Sound('./sounds/snake_move.wav')
+pickup_food = pygame.mixer.Sound('./sounds/pickup_fruit_alt.wav')
+snake_death = pygame.mixer.Sound('./sounds/snake_die.wav')
+music = pygame.mixer.Sound('./sounds/snakebite.mp3')
+gameover_amb = pygame.mixer.Sound('./sounds/gameover_ambience.mp3')
 
 
 fps_controller = pygame.time.Clock()
@@ -50,7 +50,7 @@ pygame.mixer.Channel(1).play(music, 1)
 
 def game_over():
     global game_active, score, difficulty
-    snake_gameover = pygame.image.load('snake_die.png')
+    snake_gameover = pygame.image.load('./images/snake_die.png')
     game_over_surface = font.render('Game Over!', True, Black)
     game_over_surface_2 = font_small.render(f'Score: {score}', True, Black)
     game_over_surface_3 = font_small.render('Press R to restart..', True, Black)
@@ -138,9 +138,9 @@ while True:
             game_active = False
 
         window.fill(Black)
-        desk = pygame.image.load("Desk.png")
+        desk = pygame.image.load("./images/Desk.png")
         window.blit(desk, (0, 0))
-        bgd_image = pygame.image.load("NokiaPhone.png")
+        bgd_image = pygame.image.load("./images/NokiaPhone.png")
         window.blit(bgd_image, (0, 0))
         score_disp = font_smaller.render(f'Score: {score}', True, Black)
         score_rect = score_disp.get_rect()

@@ -3,7 +3,7 @@ import pygame.mixer as gamesound
 
 gamesound.init(44100,-16,1, 1024)
 gamesound.set_num_channels(5)
-food_eat = gamesound.Sound('../../sounds/pickup_fruit_alt.wav')
+food_eat = gamesound.Sound('./sounds/pickup_fruit_alt.wav')
 
 
 class Direction(Enum):
